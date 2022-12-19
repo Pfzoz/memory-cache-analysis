@@ -2,7 +2,7 @@ from os import system, remove, listdir, getcwd
 from subprocess import check_output, run
 from sys import argv
 
-if __name__ != '__main__':
+if __name__ == '__main__':
     # python ./mulmatriz.c 750 750 750 750 200 t
     # 0      1             2   3   4   5   6   7
     total_o_elapsed = 0
