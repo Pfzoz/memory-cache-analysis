@@ -27,7 +27,9 @@ double **create_r_matrix(int m, int n)
     {
         for (int ia = 0; ia < n; ia++)
         {
-            result[i][ia] = random();
+            double range = (RAND_MAX-0); 
+            double div = RAND_MAX / range;
+            result[i][ia] = 0 + (rand() / div);
         }
     }
 
@@ -109,6 +111,9 @@ int main(int argc, char *argv[])
 {
     float time = 0.0;
     clock_t start, end;
+    double **norm_mult;
+    double **trans_mult;
+    double **result_mat;
     int m = atoi(argv[1]), n = atoi(argv[2]), bm = atoi(argv[3]), bn = atoi(argv[4]);
     char mode = argv[5][0];
     char specify = 'n';
@@ -119,18 +124,29 @@ int main(int argc, char *argv[])
 
     if (mode == 'o')
     {
-        double **norm_mult = norm_multiply(a, b, m, n, bm, bn);
+        norm_mult = norm_multiply(a, b, m, n, bm, bn);
     }
     else if (mode == 't')
     {
         double **trans_b = transpose(b, bm, bn);
         if (specify == 'n') start = clock();
-        double **trans_mult = trans_multiply(a, trans_b, m, n, bn, bm);
+        trans_mult = trans_multiply(a, trans_b, m, n, bn, bm);
     }
     
     end = clock();
     time = (float) (((end - start) + 0.0) / CLOCKS_PER_SEC);
     printf("Elapsed time: %fs\n", time);
-
+    FILE *fh = fopen("result.csv", "w+");
+    if (mode == 't') result_mat = trans_mult;
+    else result_mat = norm_mult;
+    for (int i = 0; i < n; i++)
+    {
+        for (int ia = 0; ia < bn; ia++)
+        {
+            if (ia != bn-1) fprintf(fh, "%lf;", result_mat[i][ia]);
+            else fprintf(fh, "%lf\n", result_mat[i][ia]);
+        }
+    }
+    fclose(fh);
     return 0;
 }
