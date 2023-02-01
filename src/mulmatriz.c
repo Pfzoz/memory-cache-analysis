@@ -139,6 +139,24 @@ int main(int argc, char *argv[])
     FILE *fh = fopen("result.csv", "w+");
     if (mode == 't') result_mat = trans_mult;
     else result_mat = norm_mult;
+    FILE *fa = fopen("a_matrix.csv", "w+");
+    FILE *fb = fopen("b_matrix.csv", "w+");
+    for (int i = 0; i < m; i++)
+    {
+        for (int ia = 0; ia < n; ia++)
+        {
+            if (ia != n-1) fprintf(fa, "%lf;", a[i][ia]);
+            else fprintf(fa, "%lf\n", a[i][ia]);
+        }
+    }
+    for (int i = 0; i < m; i++)
+    {
+        for (int ia = 0; ia < n; ia++)
+        {
+            if (ia != n-1) fprintf(fb, "%lf;", b[i][ia]);
+            else fprintf(fb, "%lf\n", b[i][ia]);
+        }
+    }
     for (int i = 0; i < n; i++)
     {
         for (int ia = 0; ia < bn; ia++)
@@ -147,6 +165,8 @@ int main(int argc, char *argv[])
             else fprintf(fh, "%lf\n", result_mat[i][ia]);
         }
     }
+    fclose(fa);
+    fclose(fb);
     fclose(fh);
     return 0;
 }
