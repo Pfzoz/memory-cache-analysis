@@ -10,15 +10,14 @@ if(__name__ == "__main__"):
         
     elif(c_type == "-m"):
         args = sys.argv[:]
-        times = int(args[2])
-        print(args)
+        z_times = int(args[2])
+        times = int(args[3])
         raising = 200
-
         for i, arg in enumerate(args):
             if "raising=" in arg:
                 raising = int(arg.split("raising=")[1])
                 args.remove(arg)
-        raising_multiplication(args[3:], times, raising=raising)
+        raising_multiplication(args[4:], times, z_times=z_times, raising=raising)
 
     elif(c_type == '-v'):
         args = sys.argv[:]

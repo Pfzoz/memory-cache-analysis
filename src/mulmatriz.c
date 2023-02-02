@@ -117,7 +117,9 @@ int main(int argc, char *argv[])
     int m = atoi(argv[1]), n = atoi(argv[2]), bm = atoi(argv[3]), bn = atoi(argv[4]);
     char mode = argv[5][0];
     char specify = 'n';
+    char save = 'n';
     if (argc >= 7) specify = argv[6][0];
+    if (argc >= 8) save = argv[7][0];
     double **a = create_r_matrix(m, n);
     double **b = create_r_matrix(bm, bn);
     if (specify == 't' || mode == 'o') start = clock();
@@ -136,37 +138,40 @@ int main(int argc, char *argv[])
     end = clock();
     time = (float) (((end - start) + 0.0) / CLOCKS_PER_SEC);
     printf("Elapsed time: %fs\n", time);
-    FILE *fh = fopen("result.csv", "w+");
-    if (mode == 't') result_mat = trans_mult;
-    else result_mat = norm_mult;
-    FILE *fa = fopen("a_matrix.csv", "w+");
-    FILE *fb = fopen("b_matrix.csv", "w+");
-    for (int i = 0; i < m; i++)
+    if (save == 'y')
     {
-        for (int ia = 0; ia < n; ia++)
+        FILE *fh = fopen("result.csv", "w+");
+        if (mode == 't') result_mat = trans_mult;
+        else result_mat = norm_mult;
+        FILE *fa = fopen("a_matrix.csv", "w+");
+        FILE *fb = fopen("b_matrix.csv", "w+");
+        for (int i = 0; i < m; i++)
         {
-            if (ia != n-1) fprintf(fa, "%lf;", a[i][ia]);
-            else fprintf(fa, "%lf\n", a[i][ia]);
+            for (int ia = 0; ia < n; ia++)
+            {
+                if (ia != n-1) fprintf(fa, "%lf;", a[i][ia]);
+                else fprintf(fa, "%lf\n", a[i][ia]);
+            }
         }
-    }
-    for (int i = 0; i < bm; i++)
-    {
-        for (int ia = 0; ia < bn; ia++)
+        for (int i = 0; i < bm; i++)
         {
-            if (ia != bn-1) fprintf(fb, "%lf;", b[i][ia]);
-            else fprintf(fb, "%lf\n", b[i][ia]);
+            for (int ia = 0; ia < bn; ia++)
+            {
+                if (ia != bn-1) fprintf(fb, "%lf;", b[i][ia]);
+                else fprintf(fb, "%lf\n", b[i][ia]);
+            }
         }
-    }
-    for (int i = 0; i < m; i++)
-    {
-        for (int ia = 0; ia < bn; ia++)
+        for (int i = 0; i < m; i++)
         {
-            if (ia != bn-1) fprintf(fh, "%lf;", result_mat[i][ia]);
-            else fprintf(fh, "%lf\n", result_mat[i][ia]);
+            for (int ia = 0; ia < bn; ia++)
+            {
+                if (ia != bn-1) fprintf(fh, "%lf;", result_mat[i][ia]);
+                else fprintf(fh, "%lf\n", result_mat[i][ia]);
+            }
         }
+        fclose(fa);
+        fclose(fb);
+        fclose(fh);
     }
-    fclose(fa);
-    fclose(fb);
-    fclose(fh);
     return 0;
 }
