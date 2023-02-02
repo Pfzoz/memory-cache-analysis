@@ -149,15 +149,15 @@ int main(int argc, char *argv[])
             else fprintf(fa, "%lf\n", a[i][ia]);
         }
     }
-    for (int i = 0; i < m; i++)
+    for (int i = 0; i < bm; i++)
     {
-        for (int ia = 0; ia < n; ia++)
+        for (int ia = 0; ia < bn; ia++)
         {
-            if (ia != n-1) fprintf(fb, "%lf;", b[i][ia]);
+            if (ia != bn-1) fprintf(fb, "%lf;", b[i][ia]);
             else fprintf(fb, "%lf\n", b[i][ia]);
         }
     }
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < m; i++)
     {
         for (int ia = 0; ia < bn; ia++)
         {
