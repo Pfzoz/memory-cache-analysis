@@ -14,6 +14,8 @@ import os
 # Iteration{raising} no formato {raising}-I-{iteração}-{estilo_de_execução}-{matriz}.csv
 # No caso {matriz} pode ser a A, B ou a resultado
 
+# save define se vai salvar as matrizes ou não, no caso ela só é alterável por código.
+
 def iter_command(command : str,
                 original_shape : list, 
                 appends : list, 
