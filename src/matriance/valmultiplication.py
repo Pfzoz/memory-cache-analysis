@@ -1,5 +1,13 @@
 import os
 
+# Esse código executa normalmente a multplicação feita em C, porém faz isso através do comando
+# valgrind --tool=cachegrind
+
+# Adiciono a flag --log-file= pra conseguir o log do valgrind e fazer um split nesse .txt pra achar a Miss Rate da cache durante
+# a multiplicação
+
+# Ele executa duas vezes, uma pra normal e outra pra transposta, ai mostra os Miss Rate no final.
+
 def cachegrind(command_args : list):
     new_string = ''
     for arg in command_args:
