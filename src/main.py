@@ -1,18 +1,29 @@
 import sys
 from colormap.colormap import colormap
+from matriance.ramultiplication import raising_multiplication
+from matriance.valmultiplication import cachegrind
 
 O1_FILE_NAME = "o1.csv"
 O2_FILE_NAME = "o2.csv"
 O3_FILE_NAME = "o3.csv"
 
 if(__name__ == "__main__"):
-    type = sys.argv[1]
-    if(type == "-c"):
-        colormap(O1_FILE_NAME, O2_FILE_NAME, O3_FILE_NAME)
+    c_type = sys.argv[1]
+    if(c_type == "-c"):
+        colormap()
         
+    elif(c_type == "-m"):
+        args = sys.argv[:]
+        z_times = int(args[2])
+        times = int(args[3])
+        raising = 200
+        for i, arg in enumerate(args):
+            if "raising=" in arg:
+                raising = int(arg.split("raising=")[1])
+                args.remove(arg)
+        raising_multiplication(args[4:], times, z_times=z_times, raising=raising)
 
-    elif(type == "-m"):
-        # c_file_name = 
-        # matrix_size_1 = 
-        # matrix_size_2 =
-        pass
+    elif(c_type == '-v'):
+        args = sys.argv[:]
+        args = args[2:]
+        cachegrind(args)
