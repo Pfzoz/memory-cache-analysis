@@ -140,7 +140,9 @@ int main(int argc, char *argv[])
     printf("Elapsed time: %fs\n", time);
     if (save == 'y')
     {
-        FILE *fh = fopen("result.csv", "w+");
+        FILE *fh;
+        if (argc >= 9) fh = fopen(argv[8], "w+");
+        else fh = fopen("result.csv", "w+");
         if (mode == 't') result_mat = trans_mult;
         else result_mat = norm_mult;
         FILE *fa = fopen("a_matrix.csv", "w+");
