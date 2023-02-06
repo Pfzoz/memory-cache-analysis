@@ -3,10 +3,6 @@ from colormap.colormap import colormap
 from matriance.ramultiplication import raising_multiplication
 from matriance.valmultiplication import cachegrind
 
-O1_FILE_NAME = "o1.csv"
-O2_FILE_NAME = "o2.csv"
-O3_FILE_NAME = "o3.csv"
-
 if(__name__ == "__main__"):
     c_type = sys.argv[1]
     if(c_type == "-c"):
