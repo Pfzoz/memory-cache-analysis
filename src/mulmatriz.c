@@ -27,9 +27,19 @@ double **create_r_matrix(int m, int n)
     {
         for (int ia = 0; ia < n; ia++)
         {
-            double range = (RAND_MAX-0); 
-            double div = RAND_MAX / range;
-            result[i][ia] = 0 + (rand() / div);
+            double random = ((double) rand()) / 20;
+            double random2 = ((double) rand()) / 20;
+
+            double number = random / random2;    
+            printf("%lf    ", number)  ; 
+            
+            // Take the number between 0-1 above and multiply it by (max - min) to get a 
+            // number in the range of 0 ... (max - min)
+            
+            // take this number in the range of 0 - (max-min) above and add min to it to 
+            // get a number in the range of min ... max (adding min to 0 give us min, 
+            // adding min to max-min gives us back max!)
+            result[i][ia] = number;
         }
     }
 
